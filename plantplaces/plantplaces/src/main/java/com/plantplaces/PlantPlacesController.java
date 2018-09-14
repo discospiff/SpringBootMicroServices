@@ -25,10 +25,11 @@ public class PlantPlacesController {
 	 * @return
 	 */
 	@RequestMapping(value="/start", method=RequestMethod.GET)
-	public String read(Model model) {
+	@ResponseBody
+	public SpecimenDTO read(Model model) {
 		SpecimenDTO specimenDTO = specimenServiceStub.fetchById(43);
 		model.addAttribute("specimenDTO", specimenDTO);
-		return "start";
+		return specimenDTO;
 		
 	}
 
