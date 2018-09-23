@@ -1,4 +1,4 @@
-package com.plantplaces.plantplaces;
+package com.plantplaces;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
