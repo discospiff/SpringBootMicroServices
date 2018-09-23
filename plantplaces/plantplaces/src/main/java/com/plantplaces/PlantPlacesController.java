@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -39,6 +40,14 @@ public class PlantPlacesController {
 		return "start";
 	}
 
+	@RequestMapping(value="/addspecimen", method=RequestMethod.GET)
+	public String addSpecimen(Model model, @RequestParam(value="latitude", required=false, defaultValue="0.0") String latitude) {
+		SpecimenDTO specimenDTO = specimenServiceStub.fetchById(43);
+		specimenDTO.setLatitude(latitude); 
+		model.addAttribute("specimenDTO", specimenDTO);
+		return "start";
+	}
+	
 	/**
 	 * Handle the /start endpoint.
 	 * @return
