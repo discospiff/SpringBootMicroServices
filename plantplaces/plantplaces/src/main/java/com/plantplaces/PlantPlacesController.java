@@ -3,6 +3,7 @@ package com.plantplaces;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,13 +22,19 @@ public class PlantPlacesController {
 	@Autowired
 	private ISpecimenService specimenServiceStub;
 
+	@RequestMapping(value="/savespecimen")
+	public String saveSpecimen(SpecimenDTO specimenDTO) {
+		specimenDTO.setPlantId(13);
+		return "start";
+	}
+	
 	/**
 	 * Handle the /start endpoint.
 	 * @return
 	 */
-	@RequestMapping(value="/start", method=RequestMethod.GET)
+	@RequestMapping(value="/start", method=RequestMethod.GET, headers={"content-type=text/json"})
 	@ResponseBody
-	public SpecimenDTO read(Model model) {
+	public SpecimenDTO readJSON(Model model) {
 		SpecimenDTO specimenDTO = specimenServiceStub.fetchById(43);
 		model.addAttribute("specimenDTO", specimenDTO);
 		return specimenDTO;
@@ -35,8 +42,9 @@ public class PlantPlacesController {
 	}
 
 	
-	@RequestMapping(value="/start", method=RequestMethod.GET, headers={"content-type=text/json"})
-	public String readJSON() {
+	@RequestMapping(value="/start", method=RequestMethod.GET)
+	public String read(Model model) {
+		model.addAttribute("specimenDTO", new SpecimenDTO());
 		return "start";
 	}
 

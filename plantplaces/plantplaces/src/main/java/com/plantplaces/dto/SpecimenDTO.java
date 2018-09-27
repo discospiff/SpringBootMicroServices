@@ -1,5 +1,7 @@
 package com.plantplaces.dto;
 
+import org.springframework.stereotype.Component;
+
 public class SpecimenDTO {
 
 	private int specimenId;

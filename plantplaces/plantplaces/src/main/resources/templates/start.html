@@ -7,7 +7,18 @@
 <body>
 Welcome to PlantPlaces!
 <br/>
-Your specimen is:
-<p th:text="${specimenDTO}"/>
+Your specimen is: <p th:text="${specimenDTO}"/>
+
+
+<form action="#" th:action="@{/savespecimen}" th:object="${specimenDTO}" method="GET">
+Latitude: <input type="text" name="latitude" th:field="*{latitude}"/><br/>
+Longitude: <input type="text" name="longitude" th:field="*{longitude}"/><br/>
+Description: <input type="text" name="description" th:field="*{description}"/><br/>
+Plant: <input type="text" name="plantId" th:field="*{plantId}"/><br/>
+
+<button name="submit" type="submit" value="0">Submit</button>
+</form>
+
+
 </body>
 </html>
