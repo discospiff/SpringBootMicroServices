@@ -80,6 +80,29 @@ public class SpecimenServiceTest {
 		whenTheUserSearchesForJunk();
 		thenMyPlantDiaryReturnsZeroResults();
 	}
+	
+	@Test
+	public void fetchPlants_validateResultsForCercis() {
+		givenUserIsLoggedInToMyPlantDiary();
+		whenTheUserSearchesForCercis();
+		thenMyPlantDiaryReturnsEasternRedbud();
+	}
+
+	private void whenTheUserSearchesForCercis() {
+		// TODO Auto-generated method stub
+		plants = specimenService.fetchPlants("Cercis");
+	}
+ 
+	private void thenMyPlantDiaryReturnsEasternRedbud() {
+		// TODO Auto-generated method stub
+		boolean redbudFound = false;
+		for (PlantDTO plantDTO : plants) {
+			if (plantDTO.getCommon().contains("Eastern Redbud")) {
+				redbudFound = true;
+			}
+		}
+		assertTrue(redbudFound);
+	}
 
 	private void givenUserIsLoggedInToMyPlantDiary() {
 		
