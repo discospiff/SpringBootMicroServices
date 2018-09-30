@@ -5,7 +5,11 @@
 <title>PlantPlaces.com Virtual Arboretum</title>
 </head>
 <body>
+<form action="#" th:action="@{/searchPlants}" method="GET">
 Welcome to PlantPlaces!
+	<input type="text" name="searchTerm"/>
+	<button name="submit" type="submit" value="0">Search</button>
+</form>
 <br/>
 Your specimen is: <p th:text="${specimenDTO}"/>
 
