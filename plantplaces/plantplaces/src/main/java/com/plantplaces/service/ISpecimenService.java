@@ -31,7 +31,7 @@ public interface ISpecimenService {
 	 * @param string the search criteria: can be genus, species, cultivar, or common
 	 * @return a list of matching plants.
 	 */
-	List<PlantDTO> fetchPlants(String string);
+	List<PlantDTO> fetchPlants(String string) throws Exception;
 
 	void setSpecimenDAO(ISpecimenDAO specimenDAO);
 

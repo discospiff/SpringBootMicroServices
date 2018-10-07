@@ -100,7 +100,13 @@ public class PlantPlacesController {
 	@RequestMapping("/searchPlants")
 	public String searchPlants(@RequestParam(value="searchTerm", required=false, defaultValue="") String searchTerm) {
 		String enhancedTerm = searchTerm + "";
-		List<PlantDTO> fetchPlants = specimenService.fetchPlants(searchTerm);
+		try {
+			List<PlantDTO> fetchPlants = specimenService.fetchPlants(searchTerm);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return "error";
+		}
 		return "start";
 	}
 	

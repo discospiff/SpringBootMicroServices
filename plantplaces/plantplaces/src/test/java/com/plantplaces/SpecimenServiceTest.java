@@ -43,14 +43,14 @@ public class SpecimenServiceTest {
 	}
 	
 	@Test
-	public void saveSpecimen_whenRedbudEntered() {
+	public void saveSpecimen_whenRedbudEntered() throws Exception {
 		givenUserIsLoggedInToMyPlantDiary();
 		whenUserSearchesForEasternRedbud();
 		whenUserAddsTextDetails();
 		thenSpecimenIsSaved();
 	}
 	
-	private void whenUserSearchesForEasternRedbud() {
+	private void whenUserSearchesForEasternRedbud() throws Exception {
 		plants = specimenService.fetchPlants("Eastern Redbud");
 	}
 
@@ -75,20 +75,20 @@ public class SpecimenServiceTest {
 	}
 
 	@Test
-	public void fetchPlants_validateNoResultsForJunkData() {
+	public void fetchPlants_validateNoResultsForJunkData() throws Exception {
 		givenUserIsLoggedInToMyPlantDiary();
 		whenTheUserSearchesForJunk();
 		thenMyPlantDiaryReturnsZeroResults();
 	}
 	
 	@Test
-	public void fetchPlants_validateResultsForCercis() {
+	public void fetchPlants_validateResultsForCercis() throws Exception {
 		givenUserIsLoggedInToMyPlantDiary();
 		whenTheUserSearchesForCercis();
 		thenMyPlantDiaryReturnsEasternRedbud();
 	}
 
-	private void whenTheUserSearchesForCercis() {
+	private void whenTheUserSearchesForCercis() throws Exception {
 		// TODO Auto-generated method stub
 		plants = specimenService.fetchPlants("Cercis");
 	}
@@ -109,7 +109,7 @@ public class SpecimenServiceTest {
 	}
 	
 
-	private void whenTheUserSearchesForJunk() {
+	private void whenTheUserSearchesForJunk() throws Exception {
 		 plants = specimenService.fetchPlants("kajsd;luaopuidfjo;aj;sd");
 	}
 	
