@@ -31,7 +31,7 @@ public class SpecimenService implements ISpecimenService {
 	@Override
 	public List<PlantDTO> fetchPlants(String string) throws Exception {
 		// TODO Auto-generated method stub
-		return plantDAO.fetch("Oak");
+		return plantDAO.fetch("Maple");
 		
 	}
 
