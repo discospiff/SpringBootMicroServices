@@ -7,11 +7,10 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 </head>
 <body>
-<form action="#" th:action="@{/searchPlants}" method="GET">
-Welcome to PlantPlaces!
-	<input type="text" name="searchTerm"/>
-	<button name="submit" type="submit" value="0">Search</button>
-</form>
+
+<div th:replace="fragments/topnav :: navbar">
+</div>
+
 <br/>
 Your specimen is: <p th:text="${specimenDTO}"/>
 
