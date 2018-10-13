@@ -1,5 +1,6 @@
 package com.plantplaces;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -98,16 +99,19 @@ public class PlantPlacesController {
 	}
 	
 	@RequestMapping("/searchPlants")
-	public String searchPlants(@RequestParam(value="searchTerm", required=false, defaultValue="") String searchTerm) {
-		String enhancedTerm = searchTerm + "";
+	public ModelAndView searchPlants(@RequestParam(value="searchTerm", required=false, defaultValue="") String searchTerm) {
+		ModelAndView modelAndView = new ModelAndView();
+		List<PlantDTO> plants = new ArrayList<PlantDTO>(); 
 		try {
-			List<PlantDTO> fetchPlants = specimenService.fetchPlants(searchTerm);
+			plants = specimenService.fetchPlants(searchTerm);
+			modelAndView.setViewName("plantResults");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return "error";
+			modelAndView.setViewName("error");
 		}
-		return "start";
+		modelAndView.addObject(plants);
+		return modelAndView;
 	}
 	
 	
