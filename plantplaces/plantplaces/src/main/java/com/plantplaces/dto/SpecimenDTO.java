@@ -1,9 +1,17 @@
 package com.plantplaces.dto;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 import org.springframework.stereotype.Component;
 
+@Entity
 public class SpecimenDTO {
 
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int specimenId;
 	private String latitude;
 	private String longitude;

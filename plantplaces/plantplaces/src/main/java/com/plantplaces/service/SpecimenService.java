@@ -16,6 +16,9 @@ public class SpecimenService implements ISpecimenService {
 	@Autowired
 	IPlantDAO plantDAO;
 	
+	@Autowired
+	ISpecimenDAO specimenDAO;
+	
 	@Override
 	public SpecimenDTO fetchById(int id) {
 		// TODO Auto-generated method stub
@@ -25,6 +28,7 @@ public class SpecimenService implements ISpecimenService {
 	@Override
 	public boolean save(SpecimenDTO specimenDTO) throws Exception {
 		// TODO Auto-generated method stub
+		specimenDAO.save(specimenDTO);
 		return false;
 	}
 
