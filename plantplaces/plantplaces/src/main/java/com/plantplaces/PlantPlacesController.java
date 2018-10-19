@@ -42,8 +42,8 @@ public class PlantPlacesController {
 			specimenService.save(specimenDTO);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
+			log.error("unable to save specimen", e);
 			e.printStackTrace();
-			log.error("error saving specimen", e);
 			return "error";
 		}
 		return "start";
