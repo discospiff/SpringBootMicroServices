@@ -145,5 +145,22 @@ public class PlantPlacesController {
 		return "sustainability";
 	}
 	
+	@RequestMapping("/showSpecimens")
+	public ModelAndView showSpecimens() {
+		ModelAndView modelAndView = new ModelAndView();
+		
+		try {
+			Iterable<SpecimenDTO> allSpecimens = specimenService.fetchAllSpecimens();
+			modelAndView.setViewName("showSpecimens");
+			modelAndView.addObject("allSpecimens", allSpecimens);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			log.error("Unable to retrieve specimens", e);
+			modelAndView.setViewName("error");
+		}
+		return modelAndView;
+	}
+	
 	
 }

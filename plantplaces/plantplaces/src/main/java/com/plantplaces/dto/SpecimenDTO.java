@@ -67,7 +67,7 @@ public class SpecimenDTO {
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		return specimenId + " " + latitude + " " + longitude + " " + description;
+		return plantName + " " + specimenId + " " + latitude + " " + longitude + " " + description;
 	}
 	
 	@Override

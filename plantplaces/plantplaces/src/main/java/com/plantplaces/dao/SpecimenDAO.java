@@ -16,5 +16,10 @@ public class SpecimenDAO implements ISpecimenDAO {
 		specimenRepository.save(specimenDTO);
 		return false;
 	}
+	
+	@Override
+	public Iterable<SpecimenDTO> fetchAll() throws Exception {
+		return specimenRepository.findAll();
+	}
 
 }
