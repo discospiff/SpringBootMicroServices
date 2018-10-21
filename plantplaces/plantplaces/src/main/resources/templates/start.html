@@ -40,6 +40,12 @@ Your specimen is: <p th:text="${specimenDTO}"/>
   </div>
   <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" name="plantId" th:field="*{plantId}">
 </div>
+<div class="input-group input-group-sm mb-3">
+  <div class="input-group-prepend">
+    <span class="input-group-text" id="inputGroup-sizing-sm">Plant Name</span>
+  </div>
+  <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" name="description" th:field="*{plantName}">
+</div>
 
 <button name="submit" type="submit" value="0">Submit</button>
 </form>

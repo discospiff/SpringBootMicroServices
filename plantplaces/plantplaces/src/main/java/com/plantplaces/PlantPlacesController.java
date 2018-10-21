@@ -34,11 +34,6 @@ public class PlantPlacesController {
 
 	@RequestMapping(value="/savespecimen")
 	public String saveSpecimen(SpecimenDTO specimenDTO) {
-		specimenDTO.setDescription("Beautiful Leaf Color");
-		specimenDTO.setPlantId(83);
-		specimenDTO.setLatitude("38.74");
-		specimenDTO.setLongitude("-85.51");
-		specimenDTO.setPlantName("Quercus rubrum Red Oak");
 		try {
 			specimenService.save(specimenDTO);
 		} catch (Exception e) {
