@@ -5,6 +5,24 @@
 <title>PlantPlaces.com Virtual Arboretum</title>
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+ <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  
+  <style>
+  .ui-autocomplete-loading {
+    background: white url("images/ui-anim_basic_16x16.gif") right center no-repeat;
+  }
+  </style>
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script type="text/javascript">
+		$(function() {
+			$("#Plant_Name").autocomplete({
+				source: ["Eastern Redbud", "Eastern White Pine", "Eastern Red cedar"], 
+				minLength: 2
+			
+			});
+		});
+	</script>
 </head>
 <body>
 
@@ -44,7 +62,7 @@ Your specimen is: <p th:text="${specimenDTO}"/>
   <div class="input-group-prepend">
     <span class="input-group-text" id="inputGroup-sizing-sm">Plant Name</span>
   </div>
-  <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" name="description" th:field="*{plantName}">
+  <input id="Plant_Name" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" name="description" th:field="*{plantName}">
 </div>
 
 <button name="submit" type="submit" value="0">Submit</button>
