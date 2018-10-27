@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.plantplaces.dto.LabelValueDTO;
 import com.plantplaces.dto.PlantDTO;
 import com.plantplaces.dto.SpecimenDTO;
 import com.plantplaces.service.ISpecimenService;
@@ -168,8 +169,8 @@ public class PlantPlacesController {
 	
 	@RequestMapping(value="/plantNamesAutocomplete")
 	@ResponseBody
-	public List<String> plantNamesAutocomplete(@RequestParam(value="term", required = false, defaultValue="") String term)  {
-		List<String> suggestions = new ArrayList<String>();
+	public List<LabelValueDTO> plantNamesAutocomplete(@RequestParam(value="term", required = false, defaultValue="") String term)  {
+		List<LabelValueDTO> suggestions = new ArrayList<LabelValueDTO>();
 		try {
 			// only update when term is three characters.
 			if (term.length() == 3) {
@@ -179,7 +180,10 @@ public class PlantPlacesController {
 			
 			for (PlantDTO plantDTO : allPlants) {
 				if (plantDTO.toString().contains(term)) {
-					suggestions.add(plantDTO.toString());
+					LabelValueDTO lv = new LabelValueDTO();
+					lv.setLabel(plantDTO.toString());
+					lv.setValue(Integer.toString(plantDTO.getGuid()));
+					suggestions.add(lv);
 				}
 			}
 		} catch (Exception e) {
