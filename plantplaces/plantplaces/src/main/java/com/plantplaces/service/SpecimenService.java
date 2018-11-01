@@ -3,6 +3,7 @@ package com.plantplaces.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 
 import com.plantplaces.dao.IPlantDAO;
@@ -33,6 +34,7 @@ public class SpecimenService implements ISpecimenService {
 	}
 
 	@Override
+	@Cacheable("fetchPlants")
 	public List<PlantDTO> fetchPlants(String searchTerm) throws Exception {
 		// TODO Auto-generated method stub
 		return plantDAO.fetch(searchTerm);
