@@ -68,6 +68,10 @@ Your specimen is: <p th:text="${specimenDTO}"/>
 <button name="submit" type="submit" value="0">Submit</button>
 </form>
 
+<form method="post" enctype="multipart/form-data" action="/uploadImage">
+	<input type="file" name="imageFile">
+	<input type="submit" value="Upload"/>
+</form>
 
 </body>
 </html>

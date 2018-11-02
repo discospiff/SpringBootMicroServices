@@ -1,10 +1,14 @@
 package com.plantplaces.service;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.plantplaces.dao.IPlantDAO;
 import com.plantplaces.dao.ISpecimenDAO;
@@ -56,6 +60,15 @@ public class SpecimenService implements ISpecimenService {
 	public ISpecimenDAO getSpecimenDAO() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void saveImage(MultipartFile imageFile) throws Exception {
+		String folder = "/photos/";
+		byte[] bytes = imageFile.getBytes();
+		Path path = Paths.get(folder + imageFile.getOriginalFilename());
+		Files.write(path, bytes);
+		
 	}
 
 }
