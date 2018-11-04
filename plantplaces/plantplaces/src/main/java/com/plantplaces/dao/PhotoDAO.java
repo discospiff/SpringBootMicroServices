@@ -20,10 +20,13 @@ public class PhotoDAO implements IPhotoDAO {
 	 * @see com.plantplaces.dao.IPhotoDAO#savePhotoImage(org.springframework.web.multipart.MultipartFile)
 	 */
 	@Override
-	public void savePhotoImage(MultipartFile imageFile) throws Exception {
-		String folder = "/photos/";
+	public void savePhotoImage(PhotoDTO photoDTO, MultipartFile imageFile) throws Exception {
+		// this gets us to src/main/resources without knowing the full path (hardcoding)
+		Path currentPath = Paths.get(".");
+		Path absolutePath = currentPath.toAbsolutePath();
+		photoDTO.setPath(absolutePath + "/src/main/resources/static/photos/");
 		byte[] bytes = imageFile.getBytes();
-		Path path = Paths.get(folder + imageFile.getOriginalFilename());
+		Path path = Paths.get(photoDTO.getPath() + imageFile.getOriginalFilename());
 		Files.write(path, bytes);
 		
 	}

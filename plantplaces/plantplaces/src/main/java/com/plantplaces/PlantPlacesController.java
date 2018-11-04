@@ -40,32 +40,37 @@ public class PlantPlacesController {
 	private String firstThreeCharacters;
 
 	@PostMapping(value="/savespecimen")
-	public String saveSpecimen(@RequestParam("imageFile") MultipartFile imageFile, SpecimenDTO specimenDTO) {
+	public ModelAndView saveSpecimen(@RequestParam("imageFile") MultipartFile imageFile, SpecimenDTO specimenDTO) {
+		ModelAndView modelAndView = new ModelAndView();
 		try {
 			specimenService.save(specimenDTO);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			log.error("unable to save specimen", e);
 			e.printStackTrace();
-			return "error";
+			modelAndView.setViewName("error");
+			return modelAndView;
 		}
-		String returnValue = "start";
+		
 		
 		PhotoDTO photoDTO = new PhotoDTO();
 		photoDTO.setFileName(imageFile.getOriginalFilename());
 		photoDTO.setPath("/photo/");
 		photoDTO.setSpecimenDTO(specimenDTO);
-		
+		modelAndView.setViewName("success");
 		try {
 			specimenService.saveImage(imageFile, photoDTO);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			log.error("Error saving photo", e);
-			returnValue = "error";
+			modelAndView.setViewName("error");
+			return modelAndView;
 		}
 		
-		return returnValue;
+		modelAndView.addObject("photoDTO", photoDTO);
+		modelAndView.addObject("specimenDTO", specimenDTO);
+		return modelAndView;
 		
 	}
 	
