@@ -13,7 +13,8 @@ public class SpecimenDAO implements ISpecimenDAO {
 	@Override
 	public boolean save(SpecimenDTO specimenDTO) throws Exception {
 		// TODO Auto-generated method stub
-		specimenRepository.save(specimenDTO);
+		SpecimenDTO savedSpecimen = specimenRepository.save(specimenDTO);
+		specimenDTO = savedSpecimen;
 		return false;
 	}
 	

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.plantplaces.dao.ISpecimenDAO;
+import com.plantplaces.dto.PhotoDTO;
 import com.plantplaces.dto.PlantDTO;
 import com.plantplaces.dto.SpecimenDTO;
 
@@ -72,7 +73,7 @@ public class SpecimenServiceStub implements ISpecimenService {
 	}
 
 	@Override
-	public void saveImage(MultipartFile imageFile) throws Exception {
+	public void saveImage(MultipartFile imageFile, PhotoDTO photoDTO) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}

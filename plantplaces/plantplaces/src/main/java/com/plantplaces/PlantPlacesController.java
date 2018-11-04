@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.plantplaces.dto.LabelValueDTO;
+import com.plantplaces.dto.PhotoDTO;
 import com.plantplaces.dto.PlantDTO;
 import com.plantplaces.dto.SpecimenDTO;
 import com.plantplaces.service.ISpecimenService;
@@ -38,8 +39,8 @@ public class PlantPlacesController {
 
 	private String firstThreeCharacters;
 
-	@RequestMapping(value="/savespecimen")
-	public String saveSpecimen(SpecimenDTO specimenDTO) {
+	@PostMapping(value="/savespecimen")
+	public String saveSpecimen(@RequestParam("imageFile") MultipartFile imageFile, SpecimenDTO specimenDTO) {
 		try {
 			specimenService.save(specimenDTO);
 		} catch (Exception e) {
@@ -48,7 +49,24 @@ public class PlantPlacesController {
 			e.printStackTrace();
 			return "error";
 		}
-		return "start";
+		String returnValue = "start";
+		
+		PhotoDTO photoDTO = new PhotoDTO();
+		photoDTO.setFileName(imageFile.getOriginalFilename());
+		photoDTO.setPath("/photo/");
+		photoDTO.setSpecimenDTO(specimenDTO);
+		
+		try {
+			specimenService.saveImage(imageFile, photoDTO);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			log.error("Error saving photo", e);
+			returnValue = "error";
+		}
+		
+		return returnValue;
+		
 	}
 	
 	/**
@@ -200,8 +218,13 @@ public class PlantPlacesController {
 	@PostMapping("/uploadImage")
 	public String uploadImage(@RequestParam("imageFile") MultipartFile imageFile) {
 		String returnValue = "start";
+		
+		PhotoDTO photoDTO = new PhotoDTO();
+		photoDTO.setFileName(imageFile.getOriginalFilename());
+		photoDTO.setPath("/photo/");
+		
 		try {
-			specimenService.saveImage(imageFile);
+			specimenService.saveImage(imageFile, photoDTO);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

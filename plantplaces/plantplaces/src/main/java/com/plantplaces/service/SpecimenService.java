@@ -10,8 +10,10 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.plantplaces.dao.IPhotoDAO;
 import com.plantplaces.dao.IPlantDAO;
 import com.plantplaces.dao.ISpecimenDAO;
+import com.plantplaces.dto.PhotoDTO;
 import com.plantplaces.dto.PlantDTO;
 import com.plantplaces.dto.SpecimenDTO;
 
@@ -23,6 +25,9 @@ public class SpecimenService implements ISpecimenService {
 	
 	@Autowired
 	ISpecimenDAO specimenDAO;
+	
+	@Autowired
+	IPhotoDAO photoDAO;
 	
 	@Override
 	public SpecimenDTO fetchById(int id) {
@@ -63,12 +68,9 @@ public class SpecimenService implements ISpecimenService {
 	}
 
 	@Override
-	public void saveImage(MultipartFile imageFile) throws Exception {
-		String folder = "/photos/";
-		byte[] bytes = imageFile.getBytes();
-		Path path = Paths.get(folder + imageFile.getOriginalFilename());
-		Files.write(path, bytes);
-		
+	public void saveImage(MultipartFile imageFile, PhotoDTO photoDTO) throws Exception {
+		photoDAO.save(photoDTO);
+		photoDAO.savePhotoImage(imageFile);
 	}
 
 }
