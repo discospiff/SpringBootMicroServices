@@ -1,6 +1,9 @@
 package com.plantplaces.dao;
 
 import com.plantplaces.dto.SpecimenDTO;
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -21,6 +24,11 @@ public class SpecimenDAO implements ISpecimenDAO {
 	@Override
 	public Iterable<SpecimenDTO> fetchAll() throws Exception {
 		return specimenRepository.findAll();
+	}
+
+	@Override
+	public List<SpecimenDTO> fetchSpecimensByPlantId(int plantID) {
+		return specimenRepository.findByPlantId(plantID);
 	}
 
 }

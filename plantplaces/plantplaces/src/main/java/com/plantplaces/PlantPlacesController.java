@@ -240,6 +240,11 @@ public class PlantPlacesController {
 		return returnValue;
 	}
 
-	
+	@RequestMapping("/showSpecimenDetails") 
+	public String showSpecimenDetails(@RequestParam("plant_ID") int plantId) {
+		String returnValue = "specimenDetails";
+		List<SpecimenDTO> specimens = specimenService.fetchSpecimensByPlantId(plantId);
+		return returnValue;
+	}
 	
 }

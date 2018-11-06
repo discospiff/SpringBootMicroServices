@@ -72,5 +72,10 @@ public class SpecimenService implements ISpecimenService {
 		photoDAO.savePhotoImage(photoDTO, imageFile);
 		photoDAO.save(photoDTO);
 	}
+	
+	@Override
+	public List<SpecimenDTO> fetchSpecimensByPlantId(int plantID) {
+		return specimenDAO.fetchSpecimensByPlantId(plantID);
+	}
 
 }
