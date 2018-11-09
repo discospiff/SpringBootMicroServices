@@ -5,6 +5,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -12,6 +13,9 @@ import com.plantplaces.dto.PhotoDTO;
 
 @Component
 public class PhotoDAO implements IPhotoDAO {
+	
+	@Autowired
+	private JmsTemplate jmsTemplate;
 	
 	@Autowired
 	private PhotoRepository photoRepository;
@@ -28,6 +32,7 @@ public class PhotoDAO implements IPhotoDAO {
 		byte[] bytes = imageFile.getBytes();
 		Path path = Paths.get(photoDTO.getPath() + imageFile.getOriginalFilename());
 		Files.write(path, bytes);
+		jmsTemplate.convertAndSend("photos", path.toString());
 		
 	}
 	
