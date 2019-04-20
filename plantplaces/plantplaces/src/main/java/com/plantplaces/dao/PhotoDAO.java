@@ -6,6 +6,7 @@ import java.nio.file.Paths;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.core.JmsTemplate;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -20,6 +21,9 @@ public class PhotoDAO implements IPhotoDAO {
 	@Autowired
 	private PhotoRepository photoRepository;
 	
+	@Autowired
+	private KafkaTemplate<String, String> kafkaTemplate;
+	
 	/* (non-Javadoc)
 	 * @see com.plantplaces.dao.IPhotoDAO#savePhotoImage(org.springframework.web.multipart.MultipartFile)
 	 */
@@ -33,7 +37,7 @@ public class PhotoDAO implements IPhotoDAO {
 		Path path = Paths.get(photoDTO.getPath() + imageFile.getOriginalFilename());
 		Files.write(path, bytes);
 		jmsTemplate.convertAndSend("photos", path.normalize().toString());
-		
+		kafkaTemplate.send("test", path.normalize().toString());
 	}
 	
 	/* (non-Javadoc)
