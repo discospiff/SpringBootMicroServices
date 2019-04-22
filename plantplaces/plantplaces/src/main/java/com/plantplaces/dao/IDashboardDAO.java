@@ -12,4 +12,8 @@ public interface IDashboardDAO {
 
 	void setPhotoException(Set<String> photoException);
 
+	void setPhotoOut(Set<String> photoOut);
+
+	Set<String> getPhotoOut();
+
 }

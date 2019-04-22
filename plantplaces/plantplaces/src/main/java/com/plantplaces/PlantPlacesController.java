@@ -3,6 +3,7 @@ package com.plantplaces;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +21,7 @@ import com.plantplaces.dto.LabelValueDTO;
 import com.plantplaces.dto.PhotoDTO;
 import com.plantplaces.dto.PlantDTO;
 import com.plantplaces.dto.SpecimenDTO;
+import com.plantplaces.service.IDashboardService;
 import com.plantplaces.service.ISpecimenService;
 
 import org.slf4j.Logger;
@@ -35,8 +37,11 @@ public class PlantPlacesController {
 	@Autowired
 	private ISpecimenService specimenService;
 
+	@Autowired
+	private IDashboardService dashboardService;
+	
 	private List<PlantDTO> allPlants;
-
+	
 	private String firstThreeCharacters;
 
 	@PostMapping(value="/savespecimen")
@@ -246,6 +251,26 @@ public class PlantPlacesController {
 		modelAndView.setViewName("specimenDetails");
 		List<SpecimenDTO> specimens = specimenService.fetchSpecimensByPlantId(plantId);
 		modelAndView.addObject("specimens", specimens);
+		return modelAndView;
+	}
+	
+	/**
+	 * Show the dashboard.
+	 * @return
+	 */
+	@RequestMapping(value="/dashboard")
+	public ModelAndView dashboard() {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("dashboard");
+		Set<String> exceptions = dashboardService.getExceptions();
+		
+		Set<String> processedPhotos = dashboardService.getProcessedPhotos();
+		
+		Set<String> unprocessedPhotos = dashboardService.getUnprocessedPhotos();
+		
+		modelAndView.addObject("exceptions", exceptions);
+		modelAndView.addObject("processedPhotos", processedPhotos);
+		modelAndView.addObject("unprocessedPhotos", unprocessedPhotos);
 		return modelAndView;
 	}
 	

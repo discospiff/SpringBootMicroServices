@@ -28,11 +28,13 @@ public class DashboardDAO implements IDashboardDAO {
 		photoException.add(path);
 	}
 
-	private Set<String> getPhotoOut() {
+	@Override
+	public Set<String> getPhotoOut() {
 		return photoOut;
 	}
 
-	private void setPhotoOut(Set<String> photoOut) {
+	@Override
+	public void setPhotoOut(Set<String> photoOut) {
 		this.photoOut = photoOut;
 	}
 	/* (non-Javadoc)
