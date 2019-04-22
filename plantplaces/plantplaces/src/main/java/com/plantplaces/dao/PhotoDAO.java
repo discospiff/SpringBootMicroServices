@@ -36,8 +36,7 @@ public class PhotoDAO implements IPhotoDAO {
 		byte[] bytes = imageFile.getBytes();
 		Path path = Paths.get(photoDTO.getPath() + imageFile.getOriginalFilename());
 		Files.write(path, bytes);
-		jmsTemplate.convertAndSend("photos", path.normalize().toString());
-		kafkaTemplate.send("test", path.normalize().toString());
+		kafkaTemplate.send("photoIn", path.normalize().toString());
 	}
 	
 	/* (non-Javadoc)
