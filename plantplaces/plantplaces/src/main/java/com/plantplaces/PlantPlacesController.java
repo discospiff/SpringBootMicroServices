@@ -100,7 +100,12 @@ public class PlantPlacesController {
 		
 	}
 
-	
+
+	/**
+	 * added java doc for read method
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping(value="/start", method=RequestMethod.GET)
 	public String read(Model model) {
 		log.info("User has entered the /start endpoint");
