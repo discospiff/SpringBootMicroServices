@@ -28,7 +28,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
-
+/**
+ * the controller class doc
+ */
 @Controller
 public class PlantPlacesController {
 	
