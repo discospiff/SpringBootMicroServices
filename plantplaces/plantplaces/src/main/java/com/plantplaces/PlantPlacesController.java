@@ -46,6 +46,12 @@ public class PlantPlacesController {
 	
 	private String firstThreeCharacters;
 
+	/**
+	 * Add method doc for postmapping
+	 * @param imageFile
+	 * @param specimenDTO
+	 * @return
+	 */
 	@PostMapping(value="/savespecimen")
 	public ModelAndView saveSpecimen(@RequestParam("imageFile") MultipartFile imageFile, SpecimenDTO specimenDTO) {
 		ModelAndView modelAndView = new ModelAndView();
